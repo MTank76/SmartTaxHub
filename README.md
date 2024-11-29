@@ -18,7 +18,7 @@ SmartTaxHub is a simple yet powerful GST billing system developed using Django. 
 ## Installation:
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/SmartTaxHub.git
+   git clone https://github.com/MTank76/SmartTaxHub.git
    ```
 
 2. **Navigate to the project directory**:
@@ -43,9 +43,6 @@ SmartTaxHub is a simple yet powerful GST billing system developed using Django. 
 
 6. Visit `http://127.0.0.1:8000` in your web browser to access the application.
 
-## Project Details:
-For more detailed information and source code explanation, you can refer to the official project page:  
-[GST Billing Project in Python Django - ProjectWorlds](https://projectworlds.in/gst-billing-project-in-python-django-with-source-code/)
 
 ## Contributing:
 If you'd like to contribute to this project, feel free to fork the repository and submit a pull request. Contributions are welcome, and we appreciate any improvements or bug fixes!
