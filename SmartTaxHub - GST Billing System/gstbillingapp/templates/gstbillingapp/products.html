@@ -1,0 +1,164 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!-- Products Header Section -->
+<div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col">
+        <h2 class="text-primary font-weight-bold">Products</h2>
+      </div>
+      <div class="col text-right">
+        <a href="{% url 'product_add' %}" id="add_product_btn">
+          <button type="button" class="btn btn-success">
+            <i class="fas fa-plus"></i> Add New
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+<!-- Products Table -->
+<div class="table-responsive">
+    <table class="table table-bordered table-striped" id="product-table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product Name</th>
+                <th>HSN</th>
+                <th>Rate With GST</th>
+                <th>GST %</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.product_hsn }}</td>
+                <td>{{ product.product_rate_with_gst }}</td>
+                <td>{{ product.product_gst_percentage }}</td>
+                <td class="text-center">
+                    <a href="{% url 'product_edit' product.id %}">
+                        <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#productDeleteModal" data-product-id="{{ product.id }}" data-product-name="{{ product.product_name }}">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="productDeleteModal" tabindex="-1" role="dialog" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productDeleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{% url 'product_delete' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    Are you sure you want to delete <b><span class="product-name"></span></b>?
+                    <input type="hidden" name="product_id" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block includejs %}
+<script type="text/javascript">
+    // Modal for confirming product deletion
+    $('#productDeleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var product_id = button.data('product-id'); // Extract info from data-* attributes
+        var product_name = button.data('product-name'); // Extract info from data-* attributes
+
+        var modal = $(this);
+        modal.find('.modal-body input').val(product_id);
+        modal.find('.product-name').text(product_name);
+    });
+
+    // DataTable Initialization
+    $(document).ready(function () {
+        $('#product-table').DataTable({
+            "order": [],
+            "columnDefs": [
+                { "targets": [4, 5], "sortable": false, "searchable": false }
+            ],
+            "paging": true,
+            "lengthChange": false,
+            "info": false,
+            "autoWidth": false
+        });
+    });
+</script>
+{% endblock %}
+
+{% block css %}
+<!-- Add FontAwesome and custom styles for better icons and table appearance -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<style>
+    /* Styling the table and buttons */
+    .table {
+        font-size: 1rem;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    /* Add padding and center alignment for delete and edit buttons */
+    .table td {
+        text-align: center;
+    }
+
+    .modal-body {
+        font-size: 1rem;
+    }
+
+    /* Table hover effect */
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Modal styling */
+    .modal-content {
+        border-radius: 8px;
+    }
+
+    /* Responsive table */
+    @media (max-width: 768px) {
+        .table {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Add space between header and table */
+    .mb-4 {
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}

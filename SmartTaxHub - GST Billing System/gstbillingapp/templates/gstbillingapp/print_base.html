@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>
+		{% block title %}
+		SmartTaxHub
+		{% endblock %}
+	</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'gstbillingapp/bootstrap-4.4.1-dist/css/bootstrap-cosmo.min.css' %}">
+	<link rel="stylesheet" href="{% static 'gstbillingapp/main.css' %}">
+
+	<!-- DataTables CSS  -->
+	<link rel="stylesheet" href="{% static 'gstbillingapp/DataTables/jquery.dataTables.min.css' %}">
+	<link rel="stylesheet" href="{% static 'gstbillingapp/DataTables/dataTables.bootstrap4.min.css' %}">
+
+	<!-- FontAwesome for icons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+	{% block includecss %}
+	{% endblock %}
+
+</head>
+
+<body>
+
+	<!-- Navbar -->
+	{% include 'gstbillingapp/navbar.html' %}
+
+	<!-- Main Content -->
+	<div class="container mt-4">
+		{% block content %}
+		<!-- CONTENT BLOCK -->
+		{% endblock %}
+	</div>
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{% static 'gstbillingapp/js/jquery-3.4.1.min.js' %}"></script>
+	<script src="{% static 'gstbillingapp/js/popper.min.js' %}"></script>
+	<script src="{% static 'gstbillingapp/bootstrap-4.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+	<!-- DataTables JS -->
+	<script src="{% static 'gstbillingapp/DataTables/jquery.dataTables.min.js' %}"></script>
+
+	<!-- Custom JS -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Initialize DataTables for dynamic table handling
+			$('#data-table').DataTable({
+				"paging": true,
+				"ordering": true,
+				"searching": true,
+				"responsive": true,
+				"columnDefs": [
+					{ "targets": -1, "orderable": false } // Disable sorting on last column (actions column)
+				]
+			});
+		});
+
+		// Example: Adding a smooth scrolling effect for anchors in the navbar
+		$('a.nav-link').on('click', function(event) {
+			if (this.hash !== "") {
+				event.preventDefault();
+				var hash = this.hash;
+				$('html, body').animate({
+					scrollTop: $(hash).offset().top
+				}, 800, function(){
+					window.location.hash = hash;
+				});
+			}
+		});
+	</script>
+
+	{% block includejs %}
+	{% endblock %}
+
+</body>
+</html>

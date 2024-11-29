@@ -1,0 +1,101 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Profile Header Section -->
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h2 class="text-primary font-weight-bold">Profile</h2>
+        </div>
+        <div class="col-md-4 text-md-right">
+            <a href="{% url 'user_profile_edit' %}" id="user_profile_edit_btn">
+                <button type="button" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Profile Info Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <tbody class="two-col-form">
+                    <tr>
+                        <th scope="row" class="text-center text-dark">Business Name:</th>
+                        <td class="text-muted">{{user_profile.business_title}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center text-dark">Address:</th>
+                        <td class="text-muted">{{user_profile.business_address}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center text-dark">Email:</th>
+                        <td class="text-muted">{{user_profile.business_email}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center text-dark">Phone:</th>
+                        <td class="text-muted">{{user_profile.business_phone}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center text-dark">GST:</th>
+                        <td class="text-muted">{{user_profile.business_gst}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- Add custom CSS to improve the design -->
+<style>
+    .table {
+        table-layout: auto; /* Allow columns to adjust based on content */
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        width: 20%; /* Adjust width if necessary */
+    }
+
+    .table td {
+        font-size: 1rem;
+        font-weight: 500;
+        max-width: 300px; /* Limit the width of each column */
+        word-wrap: break-word; /* Ensure long text wraps */
+    }
+
+    .btn-outline-primary {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        border-radius: 30px;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+        transition: background-color 0.3s ease;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+        transition: background-color 0.3s ease;
+    }
+</style>
+
+<!-- Include FontAwesome for Edit Icon -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

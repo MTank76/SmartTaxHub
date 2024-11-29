@@ -1,0 +1,134 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>
+		{% block title %}
+		SmartTaxHub
+		{% endblock %}
+	</title>
+
+	{% block metatags %}
+	{% endblock %}
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'gstbillingapp/bootstrap-4.4.1-dist/css/bootstrap-cosmo.min.css' %}">
+	<link rel="stylesheet" href="{% static 'gstbillingapp/main.css' %}">
+
+	<!-- DataTables CSS -->
+	<link rel="stylesheet" href="{% static 'gstbillingapp/DataTables/jquery.dataTables.min.css' %}">
+	<link rel="stylesheet" href="{% static 'gstbillingapp/DataTables/dataTables.bootstrap4.min.css' %}">
+
+	<!-- Custom CSS for Vibrancy -->
+	<style>
+		body {
+			background-color: #f8f9fa;
+			font-family: 'Arial', sans-serif;
+		}
+
+		.container {
+			padding-top: 30px;
+		}
+
+		.navbar {
+			background: linear-gradient(to right, #ff7e5f, #feb47b);
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.navbar a {
+			color: white !important;
+		}
+
+		.alert {
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		.alert-danger {
+			background-color: #f8d7da;
+			color: #721c24;
+		}
+
+		.alert-success {
+			background-color: #d4edda;
+			color: #155724;
+		}
+
+		.table {
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.table th, .table td {
+			text-align: center;
+			font-weight: bold;
+		}
+
+		.table-striped tbody tr:nth-child(odd) {
+			background-color: #f9f9f9;
+		}
+
+		/* Hover effect for table rows */
+		.table tbody tr:hover {
+			background-color: #f1f1f1;
+			cursor: pointer;
+		}
+	</style>
+
+	{% block includecss %}
+	{% endblock %}
+
+</head>
+
+<body>
+
+	<div class="container">
+		<!-- Content here -->
+
+		{% include 'gstbillingapp/navbar.html' %}
+
+		{% if error_message %}
+		<div class="alert alert-danger" role="alert">
+			{{error_message}}
+		</div>
+		{% endif %}
+
+		{% if success_message %}
+		<div class="alert alert-success" role="alert">
+			{{success_message}}
+		</div>
+		{% endif %}
+
+		{% block content %}
+		CONTENT BLOCK
+		{% endblock %}
+
+	</div>
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{% static 'gstbillingapp/js/jquery-3.4.1.min.js' %}"></script>
+	<script src="{% static 'gstbillingapp/js/popper.min.js' %}"></script>
+	<script src="{% static 'gstbillingapp/bootstrap-4.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+	<!-- DataTables JS -->
+	<script src="{% static 'gstbillingapp/DataTables/jquery.dataTables.min.js' %}"></script>
+
+	{% block includejs %}
+	{% endblock %}
+
+	<!-- Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-159304253-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-159304253-1');
+	</script>
+
+</body>
+</html>

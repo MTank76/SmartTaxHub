@@ -1,0 +1,97 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+<!doctype html>
+
+{% block title %}
+SmartTaxHub - Simplest GST Invoicing | Inventory Management | Bookkeeping
+{% endblock %}
+
+{% block metatags %}
+<meta name="description" content="Create GST invoices and bills for free. Automatic inventory and book management.">
+<meta name="google-site-verification" content="MJbX1a9Fs1MIE1tnpRnp4At9OzVMxoumTAvOWUlG8-w" />
+<link rel="canonical" href="https://billgst.in/" />
+
+<meta property="og:title" content="SmartTaxHub - Simplest GST Invoicing | Inventory Management | Bookkeeping" />
+<meta property="og:url" content="https://billgst.in" />
+<meta property="og:image" content="https://billgst.in{% static 'gstbillingapp/images/new_screenshot_interface.png' %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron text-center bg-gradient-primary text-secondary py-5">
+    <div class="container">
+        <h1 class="display-3 fw-bold">Welcome to SmartTaxHub</h1>
+        <p class="lead">The simplest way to manage GST invoicing, inventory, and bookkeeping effortlessly.</p>
+        <hr class="my-4">
+        <div class="d-flex justify-content-center mt-4">
+            <a class="btn btn-outline-primary btn-lg" href="#features" role="button">Explore Features</a>
+        </div>
+    </div>
+</div>
+
+<section id="features" class="py-5" style="background: linear-gradient(to right, #4e54c8, #8f94fb); color: white;">
+    <div class="container">
+        <h2 class="text-center mb-5">Why Choose SmartTaxHub?</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card bg-light text-dark h-100">
+                    <img class="card-img-top" src="{% static 'gstbillingapp/images/new_screenshot_interface.png' %}" alt="Simple Interface">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Simple Interface</h5>
+                        <p class="card-text">An intuitive and user-friendly design to get you started quickly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card bg-light text-dark h-100">
+                    <img class="card-img-top" src="{% static 'gstbillingapp/images/new_screenshot_books.png' %}" alt="Manage Books and Balances">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Bookkeeping Made Easy</h5>
+                        <p class="card-text">Track balances and manage books effortlessly to stay organized.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+                <div class="card bg-light text-dark h-100">
+                    <img class="card-img-top" src="{% static 'gstbillingapp/images/new_screenshot_inventory.png' %}" alt="Easy Inventory Management">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Inventory Management</h5>
+                        <p class="card-text">Track stock levels and streamline inventory operations effortlessly.</p>
+                    </div>
+                </div>
+            </div>
+            
+			<div class="col-md-6 mb-4">
+                <div class="card bg-light text-dark h-100">
+                    <img class="card-img-top" src="{% static 'gstbillingapp\images\new_screenshot_search.png' %}" alt="Customer and Product Search">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Advanced Search</h5>
+                        <p class="card-text">Easily find customers and products with our powerful search features.</p>
+                    </div>
+                </div>
+            </div>
+
+			<div class="col">
+                <div class="card bg-light text-dark h-100">
+			
+                    <div class="card-body d-flex align-items-center justify-content-center flex-column">
+                        <h3 class="card-title text-center">Get Started Now</h3>
+                        <p class="card-text text-center">Empower your business operations and streamline your financial management effortlessly with SmartTaxHub’s robust and comprehensive suite of features, designed to give you complete control and efficiency.</p>
+                        <a href="{% url 'invoice_create' %}" class="btn btn-primary mt-3">Start Creating Invoices</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="py-4 bg-dark text-white text-center">
+    <p class="mb-0">&copy; 2024 SmartTaxHub. All Rights Reserved.</p>
+</footer>
+
+{% endblock %}

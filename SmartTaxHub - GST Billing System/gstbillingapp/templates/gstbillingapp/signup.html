@@ -1,0 +1,143 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Page Title -->
+    <h2 class="text-primary font-weight-bold mb-4">Sign Up</h2>
+
+    <!-- Sign Up Form -->
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Card for form styling -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                
+                <!-- Table Layout for Form Fields -->
+                <table class="table">
+                    <tbody class="two-col-form">
+                        
+                        <!-- Username -->
+                        <tr>
+                            <th scope="row" class="text-right">Username:</th>
+                            <td>
+                                <input type="text" name="username" value="{{ signup_form.username.value }}" class="form-control" required>
+                            </td>
+                        </tr>
+
+                        <!-- Password -->
+                        <tr>
+                            <th scope="row" class="text-right">Password:</th>
+                            <td>
+                                <input type="password" name="password1" class="form-control" required>
+                            </td>
+                        </tr>
+
+                        <!-- Confirm Password -->
+                        <tr>
+                            <th scope="row" class="text-right">Confirm Password:</th>
+                            <td>
+                                <input type="password" name="password2" class="form-control" required>
+                            </td>
+                        </tr>
+
+                        <!-- Business Name -->
+                        <tr>
+                            <th scope="row" class="text-right">Business Name:</th>
+                            <td>
+                                <input type="text" name="business_title" value="{{ profile_edit_form.business_title.value }}" class="form-control" required>
+                            </td>
+                        </tr>
+
+                        <!-- Address -->
+                        <tr>
+                            <th scope="row" class="text-right">Address:</th>
+                            <td>
+                                <input type="text" name="business_address" value="{{ profile_edit_form.business_address.value }}" class="form-control" required>
+                            </td>
+                        </tr>
+
+                        <!-- Email -->
+                        <tr>
+                            <th scope="row" class="text-right">Email:</th>
+                            <td>
+                                <input type="email" name="business_email" value="{{ profile_edit_form.business_email.value }}" class="form-control" required>
+                            </td>
+                        </tr>
+
+                        <!-- Phone -->
+                        <tr>
+                            <th scope="row" class="text-right">Phone:</th>
+                            <td>
+                                <input type="text" name="business_phone" value="{{ profile_edit_form.business_phone.value }}" class="form-control" required>
+                            </td>
+                        </tr>
+
+                        <!-- GST -->
+                        <tr>
+                            <th scope="row" class="text-right">GST:</th>
+                            <td>
+                                <input type="text" name="business_gst" value="{{ profile_edit_form.business_gst.value }}" class="form-control" pattern="([A-Za-z0-9]{15})|(^$)" required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Submit Button -->
+                <div class="text-right">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+<!-- Add custom CSS for styling -->
+<style>
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .table td {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border-radius: 4px;
+        box-shadow: none;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        transition: background-color 0.3s ease;
+    }
+</style>

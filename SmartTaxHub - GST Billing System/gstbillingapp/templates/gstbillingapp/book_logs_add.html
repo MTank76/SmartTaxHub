@@ -1,0 +1,52 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+
+
+
+{% block content %}
+<div class="container mt-4">
+<h2 class="text-secondary font-weight-bold">Update Book</h2>
+
+<hr>
+<div class="row mb-4">
+	<div class="col">
+		<h4>Customer Name: <span class="text-primary">{{ book.customer.customer_name }}</span></h4>
+		<h4>Current Balance: <span class="text-success">{{ book.current_balance }}</span></h4>
+	</div>
+</div>
+
+
+<form method="POST">
+	{% csrf_token %}
+	<table class="table">
+		<tbody class="two-col-form">
+			<tr>
+				<th scope="row" class="text-right">Date & Time:</th>
+				<td class="form-input-td customer_search_area">{{form.date}}</td>
+			</tr>
+			<tr>
+				<th scope="row" class="text-right">Change in Balance:</th>
+				<td class="form-input-td">{{form.change}}</td>
+			</tr>
+			<tr>
+				<th scope="row" class="text-right">Change Type:</th>
+				<td class="form-input-td">{{form.change_type}}</td>
+			</tr>
+			<tr>
+				<th scope="row" class="text-right font-weight-bold">Associated Invoice Number:</th>
+				<td class="form-input-td">
+					<input type="text" name="invoice_no"  placeholder="Enter Invoice Number" required>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row" class="text-right">Description:</th>
+				<td class="form-input-td">{{form.description}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<input type="submit" class="btn btn-primary float-right" value="Submit">
+</form>
+
+{% endblock %}

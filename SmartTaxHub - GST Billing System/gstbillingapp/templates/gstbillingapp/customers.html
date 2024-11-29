@@ -1,0 +1,104 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-6">
+            <h2 class="text-primary font-weight-bold">Customers</h2>
+        </div>
+        <div class="col-md-6 text-md-right">
+            <a href="{% url 'customer_add' %}" id="add_customer_btn">
+                <button type="button" class="btn btn-success">Add New</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="customer-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>GST NO</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.customer_name }}</td>
+                    <td>{{ customer.customer_address }}</td>
+                    <td>{{ customer.customer_phone }}</td>
+                    <td>{{ customer.customer_gst }}</td>
+                    <td>
+                        <a href="{% url 'customer_edit' customer.id %}">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customerDeleteModal" data-customer-id="{{ customer.id }}" data-customer-name="{{ customer.customer_name }}">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="customerDeleteModal" tabindex="-1" role="dialog" aria-labelledby="customerDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="customerDeleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{% url 'customer_delete' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <p>Are you sure you want to delete <b><span class="customer-name"></span></b>?</p>
+                    <input type="hidden" name="customer_id" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block includejs %}
+<script type="text/javascript">
+    $('#customerDeleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var customer_id = button.data('customer-id');
+        var customer_name = button.data('customer-name');
+
+        var modal = $(this);
+        modal.find('.modal-body input').val(customer_id);
+        modal.find('.customer-name').text(customer_name);
+    });
+
+    $(document).ready(function () {
+        $('#customer-table').DataTable({
+            "order": [],
+            "columnDefs": [
+                { "targets": [4, 5], "orderable": false, "searchable": false }
+            ],
+            "paging": true,
+            "language": {
+                "emptyTable": "No customers available"
+            }
+        });
+    });
+</script>
+{% endblock %}
